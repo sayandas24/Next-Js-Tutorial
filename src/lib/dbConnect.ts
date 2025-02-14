@@ -1,37 +1,3 @@
-# Getting Started
-
-This guide outlines the steps to set up your models and schemas.
-
-## 1. Model Setup (`src/model`)
-
-### a. Define the `Message` Interface
-
-- Create an interface named `Message` that extends the `Document` interface from Mongoose.
-
-```typescript
-import { Document } from "mongoose";
-
-export interface Message extends Document {
-  // Define your message properties here (e.g., content, sender, timestamp)
-}
-```
-
-## 2. Define Schemas (`src/schemas`)
-
-```typescript
-import { z } from "zod";
-
-export const signInSchema = z.object({
-  // Schema type and acceptance
-  // identifier(previous login)
-  identifier: z.string(),
-  password: z.string(),
-});
-```
-
-## 3. Connect to DB (`src/lib/dbConnect.ts`)
-
-```typescript
 import mongoose from "mongoose";
 
 // type of the object? that will received here
@@ -63,4 +29,3 @@ async function dbConnect(): Promise<void> {
 }
 
 export default dbConnect;
-```
