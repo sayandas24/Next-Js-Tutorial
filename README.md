@@ -64,3 +64,28 @@ async function dbConnect(): Promise<void> {
 
 export default dbConnect;
 ```
+
+## 4. register user step (Setup resend-email with next.js)
+
+- first check if the user is new or registered early but did not verify the email with the verification code
+
+- created signUp and signIn schemas for that in (`src/schemas/`)
+
+- Use resend-email for that to register user,
+- if the user registered the user need to verify the email with their given otp code located in (`src/lib/resend.ts`)(`src/helpers/sendVerificationEmail.ts`) (`src/types/ApiResponse.ts`)
+- created (`src/types/ApiResponse.ts`) this file for type safety
+
+- (`src/helpers/sendVerificationEmail.ts`) sendVerificationEmail is the function to send verification email to user
+- (`emails/VerificationEmail.tsx`) is a React template that shows how the email looks like
+
+## 4. Create routes for api (`src/app/api/---`)
+### a. created sign-up route
+```yaml
+  - connect with db
+  - accessing data from frontend, (username, email, password)
+  - finding if user is present then send status code
+  -- if user is present with email but not verified with the code then do work
+  - also when user verifying hashed the password with bcrypt
+  - create user if not present
+  - send verification code in the email 
+```

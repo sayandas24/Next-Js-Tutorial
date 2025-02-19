@@ -20,7 +20,7 @@ const MessageSchema: Schema<Message> = new Schema({
   },
 });
 
-// User schema
+// User schema (type interface)
 export interface User extends Document {
   username: string;
   email: string;
