@@ -89,3 +89,15 @@ export default dbConnect;
   - create user if not present
   - send verification code in the email 
 ```
+
+## 5. NExtAuth for authentication (`src/app/api/auth/[...nextauth]`)
+```yaml
+  - create options and route files
+  - in options we have to specify the providers that we want to use
+      -- make authOptions
+      -- make provider with username and password field(manually)
+      -- find user with given email pas from db
+      -- 
+  - in route files we have to specify the callbacks that we want to use
+  - in callbacks we have to specify the jwt token that we want to use
+```
