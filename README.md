@@ -2,6 +2,8 @@
 
 This guide outlines the steps to set up your models and schemas.
 
+### 0. Grouping folder with (group) for bunch of route
+
 ## 1. Model Setup (`src/model`)
 
 ### a. Define the `Message` Interface
@@ -78,8 +80,10 @@ export default dbConnect;
 - (`src/helpers/sendVerificationEmail.ts`) sendVerificationEmail is the function to send verification email to user
 - (`emails/VerificationEmail.tsx`) is a React template that shows how the email looks like
 
-## 4. Create routes for api (`src/app/api/---`)
+## 5. Create routes for api (`src/app/api/---`)
+
 ### a. created sign-up route
+
 ```yaml
   - connect with db
   - accessing data from frontend, (username, email, password)
@@ -87,17 +91,39 @@ export default dbConnect;
   -- if user is present with email but not verified with the code then do work
   - also when user verifying hashed the password with bcrypt
   - create user if not present
-  - send verification code in the email 
+  - send verification code in the email
 ```
 
-## 5. NExtAuth for authentication (`src/app/api/auth/[...nextauth]`)
+## 6. NextAuth for authentication (`src/app/api/auth/[...nextauth]`)
+
 ```yaml
-  - create options and route files
-  - in options we have to specify the providers that we want to use
-      -- make authOptions
-      -- make provider with username and password field(manually)
-      -- find user with given email pas from db
-      -- 
-  - in route files we have to specify the callbacks that we want to use
-  - in callbacks we have to specify the jwt token that we want to use
+- create options and route files
+- in options we have to specify the providers that we want to use
+  -- make authOptions
+  -- make provider with username and password field(manually) => https://next-auth.js.org/providers/credentials
+  -- find user with given email pas from db
+  -- make pages in the authOptions method to overwrite default route
+  -- get session from jwt in the authOptions
+  -- implement session and jwt callback** in authOptions => https://next-auth.js.org/configuration/callbacks#sign-in-callback
+  -- in callback we have session and jwt, in jwt's token -> injecting user data (making powerful)
+  -- make a file for defining data types in (`src/types/next-auth.d.ts`)
+  --- modifying next-auth to add new field _id
+```
+
+### Route file in auth/route.ts
+
+```typescript
+//in route files we have to specify the callbacks that we want to use
+const handler = NextAuth(authOptions);
+
+// exporting handler as GET and POST
+export { handler as GET, handler as POST };
+```
+
+## 7. Define Middlewares (`src/middleware.ts`) https://nextjs.org/docs/app/building-your-application/routing/middleware
+
+```yaml
+- implement boilerplate code in middleware
+- define route where middleware will be applied
+- config is kahan kahan pe middleware run kare
 ```
