@@ -16,7 +16,7 @@ async function dbConnect(): Promise<void> {
   }
 
   try {
-    const db = await mongoose.connect(process.env.MONGODB_URI || "");
+    const db = await mongoose.connect(`${process.env.MONGODB_URI}/mystrymsg` || "");
 
     // checking if database connection fully ready?(readyState)
     // pass data true/false to -> connection.isConnection (condition)

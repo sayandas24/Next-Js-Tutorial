@@ -8,7 +8,7 @@ This guide outlines the steps to set up your models and schemas.
 
 ### a. Define the `Message` Interface
 
-- Create an interface named `Message` that extends the `Document` interface from Mongoose.
+- Created an interface named `Message` that extends the `Document` interface from Mongoose.
 
 ```typescript
 import { Document } from "mongoose";
@@ -74,7 +74,7 @@ export default dbConnect;
 - created signUp and signIn schemas for that in (`src/schemas/`)
 
 - Use resend-email for that to register user,
-- if the user registered the user need to verify the email with their given otp code located in (`src/lib/resend.ts`)(`src/helpers/sendVerificationEmail.ts`) (`src/types/ApiResponse.ts`)
+- if the user registered the user need to verify the email with their given otp code located in (`src/lib/resend.ts`) (`src/helpers/sendVerificationEmail.ts`) (`src/types/ApiResponse.ts`)
 - created (`src/types/ApiResponse.ts`) this file for type safety
 
 - (`src/helpers/sendVerificationEmail.ts`) sendVerificationEmail is the function to send verification email to user
@@ -89,7 +89,7 @@ export default dbConnect;
   - accessing data from frontend, (username, email, password)
   - finding if user is present then send status code
   -- if user is present with email but not verified with the code then do work
-  - also when user verifying hashed the password with bcrypt
+  - also when user verifying, hashed the password with bcrypt
   - create user if not present
   - send verification code in the email
 ```
@@ -126,4 +126,34 @@ export { handler as GET, handler as POST };
 - implement boilerplate code in middleware
 - define route where middleware will be applied
 - config is kahan kahan pe middleware run kare
+```
+
+## 8. Check username unique (`src/app/api/check-username-unique`)
+
+```yaml
+- create query schema -> UsernameQuerySchema
+  -- check if username is present in db in here -> UsernameQuerySchema
+- check username is available or not when user is typing
+  -- extracting the ?query from URL
+  -- getting the username from query
+  -- validate using zod
+  -- check in db -> if user present and verified
+```
+
+## 9. verify otp code (`src/app/api/verify-code`)
+
+```yaml
+- first connect to db
+- find the user
+- compare the code that is set in the db and the email otp code
+- if matched then verify the user
+```
+
+## 10. resend verify code again if needed (`src/app/api/reverification-code`)
+
+```yaml
+- first connect to db
+- find the user
+- send verification code in the email
+- pass details to -> sendVerificationEmail(email, username, verifyCode)
 ```

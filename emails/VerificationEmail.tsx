@@ -43,7 +43,7 @@ import {
             </Text>
           </Row>
           <Row>
-            <Text>{otp}</Text> 
+            <Text className='font-bold text-4xl'>{otp}</Text> 
           </Row>
           <Row>
             <Text>

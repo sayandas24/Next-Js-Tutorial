@@ -4,8 +4,8 @@ import UserModel from "@/model/User.model";
 import bcrypt from "bcryptjs";
 
 // sing-up user route;
-
 export async function POST(request: Request) {
+  console.log("sign-up route");
   await dbConnect();
   try {
     // accessing data from frontend
